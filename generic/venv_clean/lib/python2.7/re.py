@@ -1,1 +1,0 @@
-/home/rahulporuri/Canopy/appdata/canopy-1.4.1.1975.rh5-x86/lib/python2.7/re.py
