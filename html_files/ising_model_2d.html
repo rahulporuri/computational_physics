@@ -1526,8 +1526,10 @@ init_mathjax();
 </head>
 <body>
 
-    https://docs.python.org/2/library/random.html - random number generators in python.
-
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Refer to ising_model_1d for a brief introduction to the theory behind the ising model and what the monte carlo methods are. Here, we shall implement the ising model in a 2-dim lattice i.e spins are arranged in a uniform 2-dim grid pattern and given our dependence on nearest neighbor interaction, each spin has 4 neighbors with which it can interact.</p>
+<p>Before we go ahead with the 2-dim ising model study, here's an overview of different random number generators that come as standard in a python installation. Refer to the docs [here][https://docs.python.org/2/library/random.html]. Given that the random number generator is at the heart of a monte-carlo simulation, the library or function we should be sufficiently <em>random</em>. For instance, we look at the performance of the functions numpy.random.random and numpy.random.uniform from the library random below</p>
+</div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
@@ -1542,6 +1544,7 @@ In&nbsp;[11]:
 <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
     <span class="n">tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+    <span class="c"># np.random.random() will generate a random number between 0 &amp; 1</span>
     <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
@@ -1549,6 +1552,7 @@ In&nbsp;[11]:
 <span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
     <span class="n">tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c"># np.random.uniform(a,b) will generate random numbers in the range a,b </span>
     <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="s">&quot;the mean of the random.random output is&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="s">&quot;the variance of the random.random output is&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="s">&quot;the mean of the random.uniform output is&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="s">&quot;the variance of the random.uniform output is&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
@@ -1729,6 +1733,9 @@ oYiIFMZ//0dEpDAWeSIihbHIExEpjEWeiEhhLPJERApjkSciUhiLPBGRwljkiYgU9v+htcKYqZMi
 </div>
 
 </div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Had the functions np.random.random() and np.random.uniform(0,1) been perfect random number generators, all of the histograms would've had the same height. Maybe if i generate more random numbers, more than 10,000, we might see a difference. <em>need to check this</em>. We can also see that the function np.random.uniform(0,1) is performing better than np.random.random() generating a mean close to 0.5. <em>how should the variance look for a perfect random number generator?</em></p>
+</div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
@@ -1739,6 +1746,7 @@ In&nbsp;[94]:
 <span class="n">a</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">14400</span><span class="p">):</span>
     <span class="n">tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+    <span class="c"># picks an element at random from the input array</span>
     <span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">144</span><span class="p">);</span>
 </pre></div>
@@ -1893,7 +1901,7 @@ REQSYNgTEUng/wFn8oBwekVesAAAAABJRU5ErkJggg==
 
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>actual 2d ising</p>
+<p>Now, to get started with the actual 2-dim ising model study, the structure of the code is very similar to that of the ising_model_1d. There are functions that measure the global energy of the lattice, global magnetization of the lattice which are what we want to study. There is a function to measure the local energy i.e sum_neighbors which measures the interaction energy of a spin at site i.</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -1905,11 +1913,6 @@ In&nbsp;[2]:
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
-
-<span class="c">#kB = 6.023*1e-23</span>
-<span class="c">#T = 500</span>
-<span class="c">#beta = kB*T</span>
-<span class="c">#energy = []</span>
 
 <span class="c">#---&gt; global energy of the lattice</span>
 <span class="k">def</span> <span class="nf">global_energy</span><span class="p">(</span><span class="n">lattice</span><span class="p">):</span>
@@ -1954,8 +1957,7 @@ In&nbsp;[2]:
 In&nbsp;[2]:
 </div>
 <div class="input_area box-flex1">
-<div class="highlight"><pre><span class="c">#lattice = np.ones([12,12])</span>
-<span class="c">#---&gt; random start</span>
+<div class="highlight"><pre><span class="c">#lattice = np.ones([12,12]) for a uniform start</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">24</span>
 <span class="n">lattice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">])</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lattice</span><span class="p">)):</span>
@@ -1965,7 +1967,19 @@ In&nbsp;[2]:
 			<span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">+</span><span class="mi">1</span>
 		<span class="k">elif</span> <span class="n">tmp</span> <span class="o">&lt;</span> <span class="mf">1.</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span>
 			<span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-
+            
+<span class="c"># function to initialize the 2-dim lattice of spins, randomly in this case.</span>
+<span class="c">#def initilaize(n):</span>
+    <span class="c">#lattice = np.zeros([n,n])</span>
+    <span class="c">#for i in xrange(len(lattice)):</span>
+        <span class="c">#for j in xrange(len(lattice)):</span>
+         <span class="c">#   tmp = np.random.random()</span>
+        <span class="c">#    if tmp &gt; 1./2:</span>
+       <span class="c">#         lattice[i,j] = +1</span>
+      <span class="c">#      elif tmp &lt; 1./2:</span>
+     <span class="c">#           lattice[i,j] = -1</span>
+    <span class="c">#return lattice   </span>
+            
 <span class="c">#plt.imshow(lattice,cmap=&#39;gist_gray_r&#39;)</span>
 <span class="n">flip_posn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="c"># let&#39;s assume J = 1</span>
@@ -2547,6 +2561,9 @@ RK5CYII=
 </div>
 </div>
 
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Unlike the previous case where we just ran the system for 50,000 monte carlo time steps and measured system energy and magnetization at each of these steps, here we run 100 monte carlo sweeps where 1 monte carlo sweep is n squared monte carlo time steps and we only measure the system energy and magnetization at each mc sweep. This is a convention, one that is convenient given that the system energy and magnetization don't change by a large value with each mc time step giving us leniancy in measuring system variables.</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -3233,13 +3250,16 @@ lT6Hw+EMI7jS53A4nGHE/wP2QFhBku3z2gAAAABJRU5ErkJggg==
 </div>
 
 </div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We also measured the auto-correlation function of magnetization and plotted it to get a sense of correlation time of the system. <em>Auto correlation function shouldn't have negative values and i need to check the code that measures this!</em></p>
+</div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
 In&nbsp;[11]:
 </div>
 <div class="input_area box-flex1">
-<div class="highlight"><pre><span class="c"># checking the neighbors!</span>
+<div class="highlight"><pre><span class="c"># checking the neighbors!s</span>
 <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">flip_posn</span><span class="p">)):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lattice</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">site</span><span class="o">&lt;</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
