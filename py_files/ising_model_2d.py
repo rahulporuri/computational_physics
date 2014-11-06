@@ -1,5 +1,7 @@
 
-#     https://docs.python.org/2/library/random.html - random number generators in python.
+# Refer to ising_model_1d for a brief introduction to the theory behind the ising model and what the monte carlo methods are. Here, we shall implement the ising model in a 2-dim lattice i.e spins are arranged in a uniform 2-dim grid pattern and given our dependence on nearest neighbor interaction, each spin has 4 neighbors with which it can interact.
+# 
+# Before we go ahead with the 2-dim ising model study, here's an overview of different random number generators that come as standard in a python installation. Refer to the docs [here][https://docs.python.org/2/library/random.html]. Given that the random number generator is at the heart of a monte-carlo simulation, the library or function we should be sufficiently *random*. For instance, we look at the performance of the functions numpy.random.random and numpy.random.uniform from the library random below
 
 # In[11]:
 
@@ -11,6 +13,7 @@ plt.ion()
 x = []
 for i in xrange(10000):
     tmp = np.random.random()
+    # np.random.random() will generate a random number between 0 & 1
     x.append(tmp)
 
 plt.hist(x,100);
@@ -18,6 +21,7 @@ plt.hist(x,100);
 y = []
 for i in xrange(10000):
     tmp = np.random.uniform(0,1)
+    # np.random.uniform(a,b) will generate random numbers in the range a,b 
     y.append(tmp)
 
 print "the mean of the random.random output is", np.mean(x), "\n" "the variance of the random.random output is", np.var(x), "\n" "the mean of the random.uniform output is", np.mean(y), "\n" "the variance of the random.uniform output is", np.var(y)
@@ -38,12 +42,15 @@ plt.hist(y,100);
 
 # image file:
 
+# Had the functions np.random.random() and np.random.uniform(0,1) been perfect random number generators, all of the histograms would've had the same height. Maybe if i generate more random numbers, more than 10,000, we might see a difference. *need to check this*. We can also see that the function np.random.uniform(0,1) is performing better than np.random.random() generating a mean close to 0.5. *how should the variance look for a perfect random number generator?*
+
 # In[94]:
 
 array = np.arange(144)
 a = []
 for i in xrange(14400):
     tmp = np.random.choice(array)
+    # picks an element at random from the input array
     a.append(tmp)
 plt.hist(a,144);
 
@@ -52,7 +59,7 @@ plt.hist(a,144);
 
 # image file:
 
-# actual 2d ising
+# Now, to get started with the actual 2-dim ising model study, the structure of the code is very similar to that of the ising_model_1d. There are functions that measure the global energy of the lattice, global magnetization of the lattice which are what we want to study. There is a function to measure the local energy i.e sum_neighbors which measures the interaction energy of a spin at site i.
 
 # In[2]:
 
@@ -60,11 +67,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 get_ipython().magic(u'matplotlib inline')
-
-#kB = 6.023*1e-23
-#T = 500
-#beta = kB*T
-#energy = []
 
 #---> global energy of the lattice
 def global_energy(lattice):
@@ -101,8 +103,7 @@ def sum_neighbors(array,site):
 
 # In[2]:
 
-#lattice = np.ones([12,12])
-#---> random start
+#lattice = np.ones([12,12]) for a uniform start
 n = 24
 lattice = np.zeros([n,n])
 for i in xrange(len(lattice)):
@@ -112,7 +113,19 @@ for i in xrange(len(lattice)):
 			lattice[i,j] = +1
 		elif tmp < 1./2:
 			lattice[i,j] = -1
-
+            
+# function to initialize the 2-dim lattice of spins, randomly in this case.
+#def initilaize(n):
+    #lattice = np.zeros([n,n])
+    #for i in xrange(len(lattice)):
+        #for j in xrange(len(lattice)):
+         #   tmp = np.random.random()
+        #    if tmp > 1./2:
+       #         lattice[i,j] = +1
+      #      elif tmp < 1./2:
+     #           lattice[i,j] = -1
+    #return lattice   
+            
 #plt.imshow(lattice,cmap='gist_gray_r')
 flip_posn = np.arange(n**2)
 # let's assume J = 1
@@ -177,6 +190,8 @@ for bJ in betaJ:
 # 
 
 # image file:
+
+# Unlike the previous case where we just ran the system for 50,000 monte carlo time steps and measured system energy and magnetization at each of these steps, here we run 100 monte carlo sweeps where 1 monte carlo sweep is n squared monte carlo time steps and we only measure the system energy and magnetization at each mc sweep. This is a convention, one that is convenient given that the system energy and magnetization don't change by a large value with each mc time step giving us leniancy in measuring system variables.
 
 # In[4]:
 
@@ -274,9 +289,11 @@ for bJ in betaJ:
 
 # image file:
 
+# We also measured the auto-correlation function of magnetization and plotted it to get a sense of correlation time of the system. *Auto correlation function shouldn't have negative values and i need to check the code that measures this!*
+
 # In[11]:
 
-# checking the neighbors!
+# checking the neighbors!s
 for site in xrange(len(flip_posn)):
     n = len(lattice)
     if site<n*(n-1):
