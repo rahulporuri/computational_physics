@@ -1,0 +1,16 @@
+Openmp
+Compiling Openmp codes
+icc -o <execuatble name> <code name> -openmp -lm
+
+Matrix Multiplication code
+Input Arguments: Size of Matrix (square matrix) , num threads
+
+Exceution
+time ./<executable name> <arguments>
+The "time" gives the time taken for execution, you can use it to see the time difference on scaling threads or system size 
+
+MPI
+Compiling MPI
+mpicc -o <execuatble name> <code name> -lm
+Execution
+mpirun -np <num procs> ./<execuatble name>
