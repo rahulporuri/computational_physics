@@ -9,6 +9,7 @@ implemented so far
 -> NVT and NPT using monte carlo
 
 to implement
+-> harmonic oscillator using RK4, coupled harmonic oscillator and n-coupled harmonic oscillator
 -> unbrella sampling and the free energy of a polymer
 -> entropic sampling, entropy of an ising model and it's free energy
 -> ising in C and ising using mpi and openMP
