@@ -2,10 +2,17 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 //the locations of which are hardcoded into the preprocessor.
 //# include "file.h"
 //if it's a custom header file that you have written, present in the source directory
 //be careful with libraries you link present in /usr/local/include
+
+//one of the more useful functions in time.h is clock used as 
+//clock_t time;
+//time = clock();
+//which will store the current system time
+//ref:http://www.cplusplus.com/reference/ctime/clock/
 
 /*
 the main function should start with void main(){... return}
