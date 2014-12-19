@@ -16,6 +16,7 @@ implemented so far
 -- correct the parallized implementation to measure force
 - RK2 and RK4 to study a simple harmonic oscillator
 -- refer to [this](http://www.math.usm.edu/lambers/mat461/lecture4.pdf) lecture notes on the Runge-Kutta-Fehlberg method of adaptive step size RK
+- adaptive step size rk methods - step halving method and step scaling RK-Fehlberg method
 
 to implement
 - quantum scattering
